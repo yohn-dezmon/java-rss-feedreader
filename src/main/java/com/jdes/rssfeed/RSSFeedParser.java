@@ -66,7 +66,7 @@ public class RSSFeedParser {
                         if (isFeedHeader) {
                             isFeedHeader = false;
                             // Create a Feed object 
-                            feed = new Feed(title, link, description, language,
+                            feed = new Feed(title, link, guid, description, language,
                                     copyright, pubdate);
                         }
                         event = eventReader.nextEvent();
