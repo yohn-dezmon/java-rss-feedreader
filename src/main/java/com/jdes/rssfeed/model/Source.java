@@ -1,4 +1,4 @@
-package com.jdes.rssfeed;
+package com.jdes.rssfeed.model;
 
 import javax.persistence.*;
 import java.util.Date;
