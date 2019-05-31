@@ -113,8 +113,17 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
+        <layout>WAR</layout>
+                    <executable>true</executable>
           <mainClass>com.jdes.rssfeed.Application</mainClass>
         </configuration>
+        <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
@@ -129,4 +138,6 @@
 
 
   </build>
+  
+  
 </project>

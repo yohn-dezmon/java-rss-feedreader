@@ -6,19 +6,32 @@ import org.springframework.stereotype.Service;
 import com.jdes.rssfeed.dao.SourceRepository;
 import com.jdes.rssfeed.model.Source;
 
-//@Service
-//public class SourceServiceImpl implements SourceService {
-//	@Autowired
-//    SourcedRepository sourcerepository;
-//
-//    Source s = new Source();
-//
-//    public void getSources() {
-//    	
-//    	
-//        
-//
-//        System.out.println("Cards have been added : " + sourcerepository.findAll());
-//
-//    }
-//}
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Service
+public class SourceServiceImpl implements SourceService {
+	@Autowired
+    SourceRepository sourceRepository;
+
+    Source s = new Source();
+
+    public List<String> getSources() {
+    	
+    	Iterable<Source> sources = sourceRepository.findAll();
+    	
+    	List<String> myList = new ArrayList<String>();
+    	
+    	for (Source s: sources) {
+    		String title = s.getTitle();
+    		myList.add(title);
+    		System.out.println(title);
+    		
+    	}
+    	
+    return myList;	
+
+    }
+}
+

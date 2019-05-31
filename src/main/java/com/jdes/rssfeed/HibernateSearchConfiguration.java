@@ -1,13 +1,13 @@
 package com.jdes.rssfeed;
 
-
-import javax.persistence.EntityManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import com.jdes.rssfeed.service.HibernateSearchService;
+//
+//import javax.persistence.EntityManager;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//
+//import com.jdes.rssfeed.service.HibernateSearchService;
 //@EnableAutoConfiguration 
 //@Configuration
 //public class HibernateSearchConfiguration {

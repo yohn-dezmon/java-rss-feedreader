@@ -10,8 +10,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jdes.rssfeed.dao.ArticleRepository;
 import com.jdes.rssfeed.dao.SourceRepository;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+
+
+import com.jdes.rssfeed.service.SourceServiceImpl;
+import com.jdes.rssfeed.service.HibernateSearchService;
+import com.jdes.rssfeed.service.SourceService;
+
+
 
 
 import com.jdes.rssfeed.model.Source;
@@ -57,8 +65,11 @@ public @ResponseBody Iterable<Source> displaySources() {
 	// first you need to add atleast one source, then query it... 
 	// then we can test if jinjava works..
 	
+	// sourceRepository.findAll(); returns a JSON of the sources... how do I extract just the title?
+	
 	
 	return sourceRepository.findAll();
+
 	
 //	// set up a for loop to access the Source entities by source.get...?
 //	Source s = new Source();
@@ -66,6 +77,29 @@ public @ResponseBody Iterable<Source> displaySources() {
 //	for source in s 
 //	
 	
+}
+
+@Autowired
+private HibernateSearchService searchservice;
+
+@Autowired
+private SourceService sourceservice;
+
+
+@GetMapping(path="/sourcestitles")
+public @ResponseBody List<String> doWhatISaid() {
+	
+//	try {
+//		
+//		String egg = sourceservice.getSources();
+//		
+//	}
+//	catch (Exception Ex) {
+//		System.out.println("errrr");
+//	}
+   
+	
+	return sourceservice.getSources();
 }
 
 //
@@ -102,11 +136,6 @@ public @ResponseBody Iterable<Source> displaySources() {
 //	
 //}
 
-//    @Autowired
-//    private HibernateSearchService searchservice;
-//
-//    @Autowired
-//    private CardService cardservice
 
 
 
