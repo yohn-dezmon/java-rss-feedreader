@@ -1,8 +1,11 @@
 package com.jdes.rssfeed.service;
 
-//public class SourceService {
-//	
-//	void getSources();
-//	
-//
-//}
+import java.util.List;
+
+
+public interface SourceService {
+	
+	 List<String> getSources();
+	
+
+}
