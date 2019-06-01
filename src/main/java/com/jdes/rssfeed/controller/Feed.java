@@ -1,7 +1,9 @@
-package com.jdes.rssfeed;
+package com.jdes.rssfeed.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.jdes.rssfeed.FeedMessage;
 
 public class Feed {
 	final String title;
