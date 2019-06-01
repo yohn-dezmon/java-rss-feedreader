@@ -5,13 +5,26 @@
     <title>Sources</title>
   </head>
   <body>
-    <form method="post">
-      <input name="feed">
+  
+    <form action="#" method="post" th:action="@{/thymesources}" th:object="${input}">
+      <input type="text" th:field="*{usrInput}">
       <button type="submit">Add feed</button>
     </form>
-    {% for source in sources %}
+    <h1>RSS Feeds in the Data Base</h1>
+    <div>
+    <!-- I think sources might need to be an object...? -->
+    <p>
+    <tr th:each="source: ${sources}">
+    	<td th:text="${source}"/>
+    	<br />
+    	
+    </tr>
+    </p>
+    </div>
+    
+    <!--   {% for source in sources %}
     <div>
       <a href="{{ source.link }}">{{ source.title }}</a>
-    {% endfor %}
+    {% endfor %} -->
   </body>
 </html>

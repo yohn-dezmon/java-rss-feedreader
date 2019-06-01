@@ -1,8 +1,8 @@
 package com.jdes.rssfeed;
 
-import com.jdes.rssfeed.Feed;
 import com.jdes.rssfeed.FeedMessage;
-import com.jdes.rssfeed.RSSFeedParser;
+import com.jdes.rssfeed.controller.Feed;
+import com.jdes.rssfeed.controller.RSSFeedParser;
 
 public class ReadTest {
 	public static void main(String[] args) {
