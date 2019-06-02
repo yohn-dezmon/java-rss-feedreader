@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.jdes.rssfeed.dao.ArticleRepository;
 import com.jdes.rssfeed.dao.SourceRepository;
 
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -31,8 +31,10 @@ import com.jdes.rssfeed.service.SourceService;
 import com.jdes.rssfeed.model.Source;
 import com.jdes.rssfeed.model.Article;
 import com.jdes.rssfeed.controller.Feed;
-
-
+// DateTime conversion dependencies
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.util.Locale;
 
 
 
@@ -173,16 +175,21 @@ public void updateArticles(Source source) {
 		List<FeedMessage> entries = parsed.getMessages();
 		
 		//Article has 
-//		for (FeedMessage q: entries) {
-//			Article a = new Article();
-//			a.setBody(q.description);
-//			Date pubDate =(Date) q.getPubDate();
-//			
-//			a.setDatePublished(q.pubDate);
-//			a.setGuid(q.guid);
-//			//a.setSource
-//			
-//		}
+		for (FeedMessage q: entries) {
+			Article a = new Article();
+			a.setBody(q.description);
+			// Converting date to LocalDateTime
+			String pubDate = q.getPubDate();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
+			LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
+			a.setDatePublished(dateTime);
+			a.setGuid(q.guid);
+			// how can I access the source from which the article comes...
+			a.setSourceId(source);
+//			a.set
+			
+			
+		}
 		
 		
 		
