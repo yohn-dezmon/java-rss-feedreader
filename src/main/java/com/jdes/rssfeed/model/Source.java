@@ -3,6 +3,9 @@ package com.jdes.rssfeed.model;
 import javax.persistence.*;
 import java.util.Date;
 
+import java.time.LocalDateTime;
+
+
 @Entity
 @Table(name = "source")
 public class Source {
@@ -24,8 +27,8 @@ public class Source {
 	private String feed;
 	
 	@Column(name = "date_added", columnDefinition="DATETIME")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateAdded;
+//	@Temporal(TemporalType.TIMESTAMP)
+	private LocalDateTime dateAdded;
 	
 	public int getId() {
 		return id;
@@ -67,11 +70,11 @@ public class Source {
     }
 	
 	
-	public Date getDateAdded() {
+	public LocalDateTime getDateAdded() {
 		return dateAdded;
 	}
 	
-	public void setDateAdded(Date dateAdded) {
+	public void setDateAdded(LocalDateTime dateAdded) {
 		this.dateAdded = dateAdded;
 	}
 	

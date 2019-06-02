@@ -39,6 +39,9 @@ import java.util.Locale;
 
 
 
+
+
+
 @Controller
 public class RSSController {
 	
@@ -127,7 +130,8 @@ public String insertToSource(@ModelAttribute UsrInput input) {
 	String title = parsed.title;
 	String subTitle = parsed.description;
 	String link = parsed.link;
-	 
+	
+	LocalDateTime now = LocalDateTime.now();
 	
 	// this should insert this source into the DB..
 	Source s = new Source();
@@ -135,6 +139,7 @@ public String insertToSource(@ModelAttribute UsrInput input) {
 	s.setLink(link);
 	s.setTitle(title);
 	s.setSubtitle(subTitle);
+	s.setDateAdded(now);
 	sourceRepository.save(s);
 	
 	return "redirect:thymesources";
