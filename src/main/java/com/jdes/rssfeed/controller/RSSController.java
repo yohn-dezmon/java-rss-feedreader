@@ -17,23 +17,43 @@ import com.jdes.rssfeed.dao.SourceRepository;
 
 import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+
 
 
 import com.jdes.rssfeed.service.SourceServiceImpl;
 import com.jdes.rssfeed.service.HibernateSearchService;
 import com.jdes.rssfeed.service.SourceService;
 
-
-
-
 import com.jdes.rssfeed.model.Source;
 import com.jdes.rssfeed.model.Article;
+import com.jdes.rssfeed.controller.Feed;
+
+
+
 
 
 
 @Controller
 public class RSSController {
+	
+	@Autowired // get the bean called articleRepository 
+	private ArticleRepository articleRepository;
+
+	@Autowired 
+	private SourceRepository sourceRepository;
+	
+	@Autowired
+	private HibernateSearchService searchservice;
+
+	@Autowired
+	private SourceService sourceservice;
+	
+	@Autowired 
+	private SourceRepository sourcerepository;
 
 @GetMapping("/hello")
     public String hello(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
@@ -50,67 +70,22 @@ public class RSSController {
     return "sample";
   }
 
-@Autowired // get the bean called articleRepository 
-private ArticleRepository articleRepository;
 
-// get articles
-// get a single article
-// delete an article 
-
-//@GetMapping("/articles")
-//public List<Article> getAllArticles() {
-//	return articleRepository.findAll();
-//		
-//	}
-
-@Autowired 
-SourceRepository sourceRepository;
 
 @GetMapping(path="/sources")
 public @ResponseBody Iterable<Source> displaySources() {
-	// USE JINJAVA HERE! :D 
-	// first you need to add atleast one source, then query it... 
-	// then we can test if jinjava works..
 	
 	// sourceRepository.findAll(); returns a JSON of the sources... how do I extract just the title?
-	
-	
 	return sourceRepository.findAll();
 
-	
-//	// set up a for loop to access the Source entities by source.get...?
-//	Source s = new Source();
-//	
-//	for source in s 
-//	
-	
 }
-
-@Autowired
-private HibernateSearchService searchservice;
-
-@Autowired
-private SourceService sourceservice;
 
 
 @GetMapping(path="/sourcestitles")
 public @ResponseBody List<String> doWhatISaid() {
 	
-//	try {
-//		
-//		String egg = sourceservice.getSources();
-//		
-//	}
-//	catch (Exception Ex) {
-//		System.out.println("errrr");
-//	}
-   
-	
 	return sourceservice.getSources();
 }
-
-@Autowired 
-SourceRepository sourcerepository;
 
 //get rid of @ResponseBody b/c this returns a string, as opposed to using a template!
 @RequestMapping(value = "/thymesources", method = RequestMethod.GET)
@@ -162,10 +137,89 @@ public String insertToSource(@ModelAttribute UsrInput input) {
 	
 	return "redirect:thymesources";
 
+}
+
+public void updatingLoop() {
+	
+	Iterable<Source> sources = sourceRepository.findAll();
+	
+	
+	boolean whileLooper = true;
+	while (whileLooper == true) {
+		// wait what is the type for s?????
+		
+		for (Source s: sources) {
+			try {
+				updateArticles(s);
+				
+			} catch (Exception e) {
+				
+			}
+		}
+		// find equivalent of sleep in java...
+	}
+}
+
+public void updateArticles(Source source) {
+
+		
+		RSSFeedParser newSource = new RSSFeedParser(source.getFeed());
+		Feed parsed = newSource.readFeed();
+		
+		// entires is a list of "messages"... each of which 
+		// consists of title, link, author, guid, pubDate
+		// it just returns this in a string though... so IDK how to access it 
+		// Maybe I can do like FeedMessage.getTitle() = Article.setTitle();
+		List<FeedMessage> entries = parsed.getMessages();
+		
+		//Article has 
+//		for (FeedMessage q: entries) {
+//			Article a = new Article();
+//			a.setBody(q.description);
+//			Date pubDate =(Date) q.getPubDate();
+//			
+//			a.setDatePublished(q.pubDate);
+//			a.setGuid(q.guid);
+//			//a.setSource
+//			
+//		}
+		
+		
+		
+		// ok I need to define .getArticles(); first before doing this...
+		
+	
+
+	
+	
+	// src is Soure.query ... so sourceRepository.findall(); 
+//	parsed = feed.parse(src.feed)
+//		    feed_articles = feed.get_articles(parsed)
+//		    articles.Article.insert_from_feed(src.id, feed_articles)
+//		    print("Updated" + src.feed)
+}
+
+public void getArticles(Feed parsed) {
+	
+	List<String> articles = new ArrayList<String>();
+	
+	List<FeedMessage> entries = parsed.getMessages();
+	
+	
+	try {
+		for (int i=0; i < entries.size(); i++) {
+			
+		}
+			
+		
+	} catch (Exception e) {
+		
+	}
+	
+	
 	
 	
 }
-
 
 
 

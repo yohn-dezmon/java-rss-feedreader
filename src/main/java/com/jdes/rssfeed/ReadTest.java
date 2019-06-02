@@ -1,7 +1,7 @@
 package com.jdes.rssfeed;
 
-import com.jdes.rssfeed.FeedMessage;
 import com.jdes.rssfeed.controller.Feed;
+import com.jdes.rssfeed.controller.FeedMessage;
 import com.jdes.rssfeed.controller.RSSFeedParser;
 
 public class ReadTest {
