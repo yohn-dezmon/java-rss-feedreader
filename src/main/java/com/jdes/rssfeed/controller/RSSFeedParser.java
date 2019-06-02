@@ -5,13 +5,15 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.util.Date;
+
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 
-import com.jdes.rssfeed.FeedMessage;
+
 
 public class RSSFeedParser {
     static final String TITLE = "title";
@@ -46,7 +48,7 @@ public class RSSFeedParser {
             String language = "";
             String copyright = "";
             String author = "";
-            String pubdate = "";
+            String pubDate = "";
             String guid = "";
 
             // First create a new XMLInputFactory
@@ -65,8 +67,8 @@ public class RSSFeedParser {
                         if (isFeedHeader) {
                             isFeedHeader = false;
                             // Create a Feed object 
-                            feed = new Feed(title, link, guid, description, language,
-                                    copyright, pubdate);
+                            feed = new Feed(title, link, description, language,
+                                    copyright, pubDate);
                         }
                         event = eventReader.nextEvent();
                         break;
@@ -89,7 +91,7 @@ public class RSSFeedParser {
                         author = getCharacterData(event, eventReader);
                         break;
                     case PUB_DATE:
-                        pubdate = getCharacterData(event, eventReader);
+                        pubDate = getCharacterData(event, eventReader);
                         break;
                     case COPYRIGHT:
                         copyright = getCharacterData(event, eventReader);
@@ -103,6 +105,7 @@ public class RSSFeedParser {
                         message.setGuid(guid);
                         message.setLink(link);
                         message.setTitle(title);
+                        message.setPubDate(pubDate);
                         feed.getMessages().add(message);
                         event = eventReader.nextEvent();
                         continue;

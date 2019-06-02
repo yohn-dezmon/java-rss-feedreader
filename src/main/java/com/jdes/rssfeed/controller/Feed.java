@@ -3,12 +3,10 @@ package com.jdes.rssfeed.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jdes.rssfeed.FeedMessage;
 
 public class Feed {
 	final String title;
     final String link;
-    final String rss;
     final String description;
     final String language;
     final String copyright;
@@ -16,11 +14,10 @@ public class Feed {
 
     final List<FeedMessage> entries = new ArrayList<FeedMessage>();
 
-    public Feed(String title, String link, String rss, String description, String language,
+    public Feed(String title, String link, String description, String language,
             String copyright, String pubDate) {
         this.title = title;
         this.link = link;
-        this.rss = rss;
         this.description = description;
         this.language = language;
         this.copyright = copyright;
@@ -37,10 +34,6 @@ public class Feed {
 
     public String getLink() {
         return link;
-    }
-    
-    public String getRss() {
-        return rss;
     }
 
     public String getDescription() {
