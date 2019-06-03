@@ -12,6 +12,9 @@ import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 
 
 
@@ -45,7 +48,8 @@ public class Article {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	// does the name parameter refer to the spelling of the column in the MySQL DB or in the model?
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "source_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Source source;
 	
 	@Column(name = "date_added", columnDefinition="DATETIME")
