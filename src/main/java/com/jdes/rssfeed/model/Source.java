@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+
 
 
 @Entity
@@ -29,6 +31,9 @@ public class Source {
 	@Column(name = "date_added", columnDefinition="DATETIME")
 //	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime dateAdded;
+	
+	@OneToMany(mappedBy = "source")
+	private Set<Article> articles;
 	
 	public int getId() {
 		return id;
