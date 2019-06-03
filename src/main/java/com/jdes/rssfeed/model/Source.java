@@ -16,24 +16,24 @@ public class Source {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "title")
+	@Column(name = "title", columnDefinition="LONGTEXT")
 	private String title;
 	
-	@Column(name = "subtitle")
+	@Column(name = "subtitle", columnDefinition="LONGTEXT")
 	private String subtitle;
 	
-	@Column(name = "link")
+	@Column(name = "link", columnDefinition="LONGTEXT")
 	private String link;
 	
-	@Column(name = "feed")
+	@Column(name = "feed", columnDefinition="LONGTEXT")
 	private String feed;
 	
 	@Column(name = "date_added", columnDefinition="DATETIME")
 //	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime dateAdded;
 	
-	@OneToMany(mappedBy = "source")
-	private Set<Article> articles;
+//	@OneToMany(mappedBy = "source")
+//	private Set<Article> articles;
 	
 	public int getId() {
 		return id;
