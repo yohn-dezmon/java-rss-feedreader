@@ -30,21 +30,21 @@ public class Article {
 	@Column(name = "article_id")
 	private int id;
 	
-	@Column(name = "title")
+	@Column(name = "title", columnDefinition="LONGTEXT")
 	private String title;
 	
-	@Column(name = "body")
+	@Column(name = "body", columnDefinition="LONGTEXT")
 	private String body;
 	
-	@Column(name = "link")
+	@Column(name = "link", columnDefinition="LONGTEXT")
 	private String link;
 	
-	@Column(name = "guid")
+	@Column(name = "guid", columnDefinition="LONGTEXT")
 	private String guid;
 	
 	// Not sure if the boolean -> tinyint(1) will translate... 
-	@Column(name = "unread")
-	private boolean unread = true;
+	@Column(name = "unread", columnDefinition="tinyint(1) default 1")
+	private boolean unread;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	// does the name parameter refer to the spelling of the column in the MySQL DB or in the model?
