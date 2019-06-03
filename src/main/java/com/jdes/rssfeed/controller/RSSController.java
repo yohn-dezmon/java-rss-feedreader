@@ -182,16 +182,24 @@ public void updateArticles(Source source) {
 		//Article has 
 		for (FeedMessage q: entries) {
 			Article a = new Article();
+			a.setTitle(q.title);
 			a.setBody(q.description);
+			a.setLink(q.link);
+			a.setGuid(q.guid);
+			
+			// how can I access the source from which the article comes...
+			a.setSourceId(source);
+			
 			// Converting date to LocalDateTime
 			String pubDate = q.getPubDate();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
 			LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
 			a.setDatePublished(dateTime);
-			a.setGuid(q.guid);
-			// how can I access the source from which the article comes...
-			a.setSourceId(source);
-//			a.set
+			
+			//Date added time
+			LocalDateTime now = LocalDateTime.now();
+			a.setDateAdded(now);
+			
 			
 			
 		}

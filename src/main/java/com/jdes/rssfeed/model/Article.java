@@ -48,13 +48,11 @@ public class Article {
 	@JoinColumn(name = "id")
 	private Source source;
 	
-	@Column(name = "date_added", columnDefinition="DATETIME", nullable = false, updatable = false)
+	@Column(name = "date_added", columnDefinition="DATETIME")
 	// does this do what I think it does? (mark the time that it is inserted?)
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreationTimestamp 
-	private Date dateAdded;
+	private LocalDateTime dateAdded;
 	
-	@Column(name = "date_published", columnDefinition="DATETIME")
+	@Column(name = "date_published", columnDefinition="DATETIME", updatable= false)
 	private LocalDateTime datePublished;
 	
 	public int getId() {
@@ -116,11 +114,11 @@ public class Article {
     	this.source = source;
     }
 	
-	public Date getDateAdded() {
+	public LocalDateTime getDateAdded() {
 		return dateAdded;
 	}
 	
-	public void setDateAdded(Date dateAdded) {
+	public void setDateAdded(LocalDateTime dateAdded) {
 		this.dateAdded = dateAdded;
 	}
 	
