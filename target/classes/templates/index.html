@@ -18,14 +18,14 @@
 
         <h1 class="box_head_left" th:text=${firstSourceTitle}></h1>
         <div class="firstArticles">
-        
+
     <tr th:each="article: ${firstArticles}">
     <article>
     	<!-- <td th:text="${article.source.link}"/> -->
     	<!-- <br /> -->
     	<div class="source">
     	<a th:href="@{${article.link}}" th:text="${article.title}"></a>
-    	
+
     	</div>
     	<div class="added">
     	<td th:text="${article.dateAdded}"/>
@@ -36,37 +36,97 @@
     	<br />
     	</div>
     	
-    </article>	
+    </article>
     </tr>
-    
+    </div>
+
+
+        <h1 class="box_head_left" th:text=${thirdSourceTitle}></h1>
+        <div class="thirdArticles">
+
+    <tr th:each="article: ${thirdArticles}">
+    <article>
+    	<!-- <td th:text="${article.source.link}"/> -->
+    	<!-- <br /> -->
+    	<div class="source">
+    	<a th:href="@{${article.link}}" th:text="${article.title}"></a>
+
+    	</div>
+    	<div class="added">
+    	<td th:text="${article.dateAdded}"/>
+    	<br />
+    	</div>
+    	<div class="body">
+    	<td th:text="${article.body}"/>
+    	<br />
+    	</div>
+
+    </article>
+    </tr>
+    </div>
+
+    </div>
+
+
+    <div class="right_side_div">
+
+
+        <h1 class="box_head_right" th:text=${secondSourceTitle}></h1>
+        <div class="secondArticles">
+
+    <tr th:each="article: ${secondArticles}">
+    <article>
+    	<!-- <td th:text="${article.source.link}"/> -->
+    	<!-- <br /> -->
+    	<div class="source">
+    	<a th:href="@{${article.link}}" th:text="${article.title}"></a>
+
+    	</div>
+    	<div class="added">
+    	<td th:text="${article.dateAdded}"/>
+    	<br />
+    	</div>
+    	<div class="body">
+    	<td th:text="${article.body}"/>
+    	<br />
+    	</div>
+
+    </article>
+    </tr>
     </div>
     
-        
-      <!--   
-        {% for article in firstArticles %}
-        <article>
-          <h2>
-            <a href="/read/{{ article.id }}">{{ article.title }}</a>
-          </h2>
-          <div class="source">
-              
-              <a href="{{ article.source.link }}">
-                    {{ article.source.title }}
-              </a>
-          </div>
-          <div class="added">
-              {{ article.date_added }}
+    <h1 class="box_head_right" th:text=${fourthSourceTitle}></h1>
+        <div class="fourthArticles">
 
-          </div>
-          <div class="body">
-            {{ article.body }}
+    <tr th:each="article: ${fourthArticles}">
+    <article>
+    	<!-- <td th:text="${article.source.link}"/> -->
+    	<!-- <br /> -->
+    	<div class="source">
+    	<a th:href="@{${article.link}}" th:text="${article.title}"></a>
 
-          </div>
+    	</div>
+    	<div class="added">
+    	<td th:text="${article.dateAdded}"/>
+    	<br />
+    	</div>
+    	<div class="body">
+    	<td th:text="${article.body}"/>
+    	<br />
+    	</div>
 
-        </article>
-        {% endfor %}
-        </div>
- -->
+    </article>
+    </tr>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
              <!--  <h1 class="box_head_left"> {{ third_articles[0].source.title }} </h1>
               <div class="third_articles">
               {% for article in third_articles %}
@@ -97,31 +157,6 @@
         <div class="right_side_div">
 
 
-        <h1 class="box_head_right"> {{ second_articles[0].source.title }} </h1>
-        <div class="second_articles">
-        {% for article in second_articles %}
-        <article>
-          <h2>
-            <a href="/read/{{ article.id }}">{{ article.title }}</a>
-          </h2>
-          <div class="source">
-              From
-              <a href="{{ article.source.link }}">
-                    {{ article.source.title }}
-              </a>
-          </div>
-          <div class="added">
-              {{ article.date_added }}
-
-          </div>
-          <div class="body">
-            {{ article.body }}
-
-          </div>
-
-        </article>
-        {% endfor %}
-        </div>
 
                     <h1 class="box_head_right"> {{ fourth_articles[0].source.title }} </h1>
                     <div class="fourth_articles">
