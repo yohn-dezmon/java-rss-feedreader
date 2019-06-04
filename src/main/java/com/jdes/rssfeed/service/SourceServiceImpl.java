@@ -39,5 +39,11 @@ public class SourceServiceImpl implements SourceService {
     return myList;	
 
     }
+    
+//    public String getSourceTitle(int srcId) {
+//    	
+//    	Source source = new Source();
+//    	
+//    }
 }
 
