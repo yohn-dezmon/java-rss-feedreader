@@ -1,10 +1,12 @@
 package com.jdes.rssfeed.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import com.jdes.rssfeed.controller.Feed;
 import com.jdes.rssfeed.controller.FeedMessage;
@@ -75,9 +77,50 @@ public class UpdateServiceImpl {
 						
 						// Converting date to LocalDateTime
 						String pubDate = q.getPubDate();
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
-						LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
-						a.setDatePublished(dateTime);
+						
+						// I might need to add an if statment here to account for different patterns...
+						
+						boolean hoursMinSec=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}:[\\d]{2}\\s[\\w]{3}").matcher(pubDate).matches();
+						boolean zoneOffset=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}:[\\d]{2}[\\s][\\Q+\\E][\\d]{4}").matcher(pubDate).matches();
+						boolean hoursMin=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}\\s[\\w]{3}").matcher(pubDate).matches();
+						
+						
+						if (hoursMinSec == true) {
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
+							LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
+							System.out.println("hoursMinSec == true");
+							a.setDatePublished(dateTime);
+
+							
+						}
+						else if (hoursMin == true) {
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm zzz", Locale.ENGLISH);
+							LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
+							System.out.println("hoursMin == true");
+							a.setDatePublished(dateTime);
+						}
+						else if (zoneOffset == true ) {
+							// wait I don't know how to parse this one with DateTimeFormatter 
+							try {
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss xxxx", Locale.ENGLISH);
+							LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
+							a.setDatePublished(dateTime);}
+							catch (Exception e) {
+								System.out.println("zone offset didn't work");
+							}
+							System.out.println("zoneOffset == true");
+						}
+						else {
+							try {
+								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
+								LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
+							}
+							catch (Exception e) {
+								System.out.println("Invalid Published Date format!");
+							}
+						}
+						
+						
 						
 						//Date added time
 						LocalDateTime now = LocalDateTime.now();
@@ -93,7 +136,7 @@ public class UpdateServiceImpl {
 					} // for loop 
 					
 			} // other for loop 
-			Thread.sleep(1000L);	
+			Thread.sleep(60000L);	
 		} // while loop 
 		
 	} // method 
