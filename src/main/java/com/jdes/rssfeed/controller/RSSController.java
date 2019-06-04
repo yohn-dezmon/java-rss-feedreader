@@ -75,6 +75,44 @@ public class RSSController {
     return "sample";
   }
 
+@GetMapping("/")
+    public String mainPage(Model model) {
+	
+	int srcId = 1;
+	Iterable<Article> firstArticles = articleRepository.findUnreadArticles(srcId);
+	
+	model.addAttribute("firstArticles", firstArticles);
+	
+	List<String> myList = new ArrayList<String>();
+	
+	
+	for (Article a: firstArticles) {
+		String title = a.getTitle();
+		myList.add(title);
+		System.out.println(title);
+		
+	}
+	
+	model.addAttribute("myList", myList);
+	
+	
+	
+	
+//	query = Article.query
+//		    def query_over(query, src_id):
+//		        query = query.filter(Article.unread == True, Article.source_id == src_id)
+//		        query = query.order_by(Article.date_added.desc())
+//		        return query.all()
+//
+//		# this should be automated better, to query for available source ids, and for all source ids it should create an articles box...
+//		    first_articles = query_over(query, 1)
+//		    second_articles = query_over(query, 2)
+//		    third_articles = query_over(query, 11)
+//		    fourth_articles = query_over(query, 10)
+	
+	return "index";
+}
+
 
 
 @GetMapping(path="/sources")
