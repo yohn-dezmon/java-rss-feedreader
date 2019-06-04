@@ -146,45 +146,5 @@ public class UpdateServiceImpl {
 
 	
 		
-						
-						
-	
-			
-					
-			
-			
-		
-		
-		
-	
-	
-	
-
-			
-			
-			
-	
-//	@Async
-//	public void getArticles(Feed parsed) {
-//		
-//		List<String> articles = new ArrayList<String>();
-//		
-//		List<FeedMessage> entries = parsed.getMessages();
-//		
-//		
-//		try {
-//			for (int i=0; i < entries.size(); i++) {
-//				
-//			}
-//				
-//			
-//		} catch (Exception e) {
-//			
-//		}
-//		
-//		
-//		
-//		
-//	}
-
+				
 
