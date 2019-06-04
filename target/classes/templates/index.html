@@ -17,7 +17,7 @@
 
 
         <h1 class="box_head_left" th:text=${firstSourceTitle}></h1>
-        <div class="firstArticles">
+        <div class="first_articles">
 
     <tr th:each="article: ${firstArticles}">
     <article>
@@ -42,7 +42,7 @@
 
 
         <h1 class="box_head_left" th:text=${thirdSourceTitle}></h1>
-        <div class="thirdArticles">
+        <div class="third_articles">
 
     <tr th:each="article: ${thirdArticles}">
     <article>
@@ -72,7 +72,7 @@
 
 
         <h1 class="box_head_right" th:text=${secondSourceTitle}></h1>
-        <div class="secondArticles">
+        <div class="second_articles">
 
     <tr th:each="article: ${secondArticles}">
     <article>
@@ -96,7 +96,7 @@
     </div>
     
     <h1 class="box_head_right" th:text=${fourthSourceTitle}></h1>
-        <div class="fourthArticles">
+        <div class="fourth_articles">
 
     <tr th:each="article: ${fourthArticles}">
     <article>
@@ -121,71 +121,6 @@
 
     </div>
 
-
-
-
-
-
-
-             <!--  <h1 class="box_head_left"> {{ third_articles[0].source.title }} </h1>
-              <div class="third_articles">
-              {% for article in third_articles %}
-              <article>
-                <h2>
-                  <a href="/read/{{ article.id }}">{{ article.title }}</a>
-                </h2>
-                <div class="source">
-                    From
-                    <a href="{{ article.source.link }}">
-                          {{ article.source.title }}
-                    </a>
-                </div>
-                <div class="added">
-                    {{ article.date_added }}
-
-                </div>
-                <div class="body">
-                  {{ article.body }}
-
-                </div>
-
-              </article>
-              {% endfor %}
-              </div>
-        </div>
-
-        <div class="right_side_div">
-
-
-
-                    <h1 class="box_head_right"> {{ fourth_articles[0].source.title }} </h1>
-                    <div class="fourth_articles">
-                    {% for article in fourth_articles %}
-                    <article>
-                      <h2>
-                        <a href="/read/{{ article.id }}">{{ article.title }}</a>
-                      </h2>
-                      <div class="source">
-                          From
-                          <a href="{{ article.source.link }}">
-                                {{ article.source.title }}
-                          </a>
-                      </div>
-                      <div class="added">
-                          {{ article.date_added }}
-
-                      </div>
-                      <div class="body">
-                        {{ article.body }}
-
-                      </div>
-
-                    </article>
-                    {% endfor %}
-                    </div>
-
-        </div>
- -->
 
       </main>
 
