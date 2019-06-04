@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import com.jdes.rssfeed.dao.ArticleRepository;
@@ -122,36 +123,25 @@ public class RSSController {
 	model.addAttribute("fourthArticles", fourthArticles);
 	model.addAttribute("fourthSourceTitle", fourthSourceTitle);
 
-
-
-//	List<String> myList = new ArrayList<String>();
-//
-//
-//	for (Article a: firstArticles) {
-//		String title = a.getTitle();
-//		myList.add(title);
-//		System.out.println(title);
-//
-//	}
-//
-//	model.addAttribute("myList", myList);
-
-
-
-
-//	query = Article.query
-//		    def query_over(query, src_id):
-//		        query = query.filter(Article.unread == True, Article.source_id == src_id)
-//		        query = query.order_by(Article.date_added.desc())
-//		        return query.all()
-//
-//		# this should be automated better, to query for available source ids, and for all source ids it should create an articles box...
-//		    first_articles = query_over(query, 1)
-//		    second_articles = query_over(query, 2)
-//		    third_articles = query_over(query, 11)
-//		    fourth_articles = query_over(query, 10)
-
 	return "index";
+}
+
+@GetMapping(path="/read/{article_id}")
+public String markArticleRead(@PathVariable int article_id) {
+	
+	articleRepository.findById(article_id);
+	
+	// I need to make a query that just gets an article object based upon article id
+	// String<Article> clickedArticle = query...  
+	Article a1= new Article();
+	
+	a1.setUnread(true);
+	articleRepository.save(a1);
+	
+//	th:href="@{${article.link}}"
+	
+	// how can I have this redirect to the article.link from firstArticles??
+	return "redirect:";
 }
 
 
