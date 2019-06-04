@@ -1,5 +1,7 @@
 package com.jdes.rssfeed.dao;
 
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 
 //import org.springframework.data.repository.query.Param;
@@ -8,7 +10,7 @@ import com.jdes.rssfeed.model.Article;
 
 
 
-public abstract class ArticleDaoImpl implements ArticleRepository {
+public class ArticleDaoImpl implements ArticleRepository {
 	
 	private EntityManager manager;
 	
@@ -27,6 +29,78 @@ public abstract class ArticleDaoImpl implements ArticleRepository {
 		
 	
 		return article;
+	}
+
+	@Override
+	public <S extends Article> S save(S entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <S extends Article> Iterable<S> saveAll(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<Article> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean existsById(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Iterable<Article> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<Article> findAllById(Iterable<Integer> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Article entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll(Iterable<? extends Article> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Iterable<Article> findUnreadArticles(int srcId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
