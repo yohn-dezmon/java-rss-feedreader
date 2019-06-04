@@ -81,19 +81,25 @@ public class RSSController {
 	int srcId = 1;
 	Iterable<Article> firstArticles = articleRepository.findUnreadArticles(srcId);
 	
+	// I want the name of the Article... I might just do this manually...
+	String firstSourceTitle = sourceRepository.sourceTitle(srcId);
+	
+	
+	
 	model.addAttribute("firstArticles", firstArticles);
+	model.addAttribute("firstSourceTitle", firstSourceTitle);
 	
-	List<String> myList = new ArrayList<String>();
-	
-	
-	for (Article a: firstArticles) {
-		String title = a.getTitle();
-		myList.add(title);
-		System.out.println(title);
-		
-	}
-	
-	model.addAttribute("myList", myList);
+//	List<String> myList = new ArrayList<String>();
+//	
+//	
+//	for (Article a: firstArticles) {
+//		String title = a.getTitle();
+//		myList.add(title);
+//		System.out.println(title);
+//		
+//	}
+//	
+//	model.addAttribute("myList", myList);
 	
 	
 	

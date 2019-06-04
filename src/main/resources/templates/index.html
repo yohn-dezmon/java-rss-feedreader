@@ -2,29 +2,54 @@
 <html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- I may need to put a / in front of static -->
+    <link rel="stylesheet" type="text/css" href="../static/styles.css" th:href="@{/styles.css}">
     <title>Latest News</title>
   </head>
-  
+
   <body>
-  
-  <div th:text="${firstArticles}"></div>
-  
-    <!--   <main>
+
+      <main>
         <h1>Latest News</h1>
 
 
         <div class="left_side_div">
 
 
-        <h1 class="box_head_left"> {{ first_articles[0].source.title }} </h1>
-        <div class="first_articles">
-        {% for article in first_articles %}
+        <h1 class="box_head_left" th:text=${firstSourceTitle}></h1>
+        <div class="firstArticles">
+        
+    <tr th:each="article: ${firstArticles}">
+    <article>
+    	<!-- <td th:text="${article.source.link}"/> -->
+    	<!-- <br /> -->
+    	<div class="source">
+    	<a th:href="@{${article.link}}" th:text="${article.title}"></a>
+    	
+    	</div>
+    	<div class="added">
+    	<td th:text="${article.dateAdded}"/>
+    	<br />
+    	</div>
+    	<div class="body">
+    	<td th:text="${article.body}"/>
+    	<br />
+    	</div>
+    	
+    </article>	
+    </tr>
+    
+    </div>
+    
+        
+      <!--   
+        {% for article in firstArticles %}
         <article>
           <h2>
             <a href="/read/{{ article.id }}">{{ article.title }}</a>
           </h2>
           <div class="source">
-              From
+              
               <a href="{{ article.source.link }}">
                     {{ article.source.title }}
               </a>
@@ -41,8 +66,8 @@
         </article>
         {% endfor %}
         </div>
-
-              <h1 class="box_head_left"> {{ third_articles[0].source.title }} </h1>
+ -->
+             <!--  <h1 class="box_head_left"> {{ third_articles[0].source.title }} </h1>
               <div class="third_articles">
               {% for article in third_articles %}
               <article>
@@ -125,9 +150,9 @@
                     </div>
 
         </div>
+ -->
 
-
-      </main> -->
+      </main>
 
   </body>
 </html>
