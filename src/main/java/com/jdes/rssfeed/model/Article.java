@@ -39,7 +39,7 @@ public class Article {
 	@Column(name = "link", columnDefinition="LONGTEXT")
 	private String link;
 	
-	@Column(name = "guid", columnDefinition="LONGTEXT")
+	@Column(name = "guid", columnDefinition="LONGTEXT", unique= true)
 	private String guid;
 	
 	// Not sure if the boolean -> tinyint(1) will translate... 

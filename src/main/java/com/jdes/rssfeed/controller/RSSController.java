@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-
+import com.jdes.rssfeed.dao.ArticleDaoImpl;
 
 import com.jdes.rssfeed.service.SourceServiceImpl;
 import com.jdes.rssfeed.service.HibernateSearchService;
@@ -37,14 +37,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
-
-
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 
 
 
 @Controller
 public class RSSController {
+	
+	// not sure what this does exactly, https://kodejava.org/how-do-i-find-entity-by-their-id-in-jpa/
+	public static final String PERSISTENCE_UNIT_NAME = "article";
 
 	@Autowired // get the bean called articleRepository
 	private ArticleRepository articleRepository;
@@ -129,19 +133,22 @@ public class RSSController {
 @GetMapping(path="/read/{article_id}")
 public String markArticleRead(@PathVariable int article_id) {
 	
-	articleRepository.findById(article_id);
 	
-	// I need to make a query that just gets an article object based upon article id
-	// String<Article> clickedArticle = query...  
-	Article a1= new Article();
+	EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        EntityManager em = factory.createEntityManager();
+        
 	
-	a1.setUnread(true);
-	articleRepository.save(a1);
+	ArticleDaoImpl articleImpl = new ArticleDaoImpl(em);
+	Article article = articleImpl.findById(article_id); 
+
+	
+	article.setUnread(true);
+	articleRepository.save(article);
 	
 //	th:href="@{${article.link}}"
 	
 	// how can I have this redirect to the article.link from firstArticles??
-	return "redirect:";
+	return "sources";
 }
 
 
@@ -215,72 +222,6 @@ public String insertToSource(@ModelAttribute UsrInput input) {
 
 }
 
-//@RequestMapping(value = "/updateArticles", method= RequestMethod.GET)
-//public String updatingLoop(Model model) throws InterruptedException {
-//
-//	Iterable<Source> sources = sourceRepository.findAll();
-//
-//	System.out.println("Articles being updated...");
-//
-//
-//
-//
-//		for (Source s: sources) {
-//
-//				RSSFeedParser newSource = new RSSFeedParser(s.getFeed());
-//				Feed parsed = newSource.readFeed();
-//
-//				// entries is a list of "messages"... each of which
-//				// consists of title, link, author, guid, pubDate
-//				// it just returns this in a string though... so IDK how to access it
-//				// Maybe I can do like FeedMessage.getTitle() = Article.setTitle();
-//				List<FeedMessage> entries = parsed.getMessages();
-//
-//
-//				for (FeedMessage q: entries) {
-//					Article a = new Article();
-//					String title = q.getTitle();
-//					String body = q.getDescription();
-//					String link = q.getLink();
-//					String guid = q.getGuid();
-//
-//					a.setTitle(title);
-//					a.setBody(body);
-//					a.setLink(link);
-//					a.setGuid(guid);
-//
-//					// how can I access the source from which the article comes...
-//					a.setSourceId(s);
-//
-//					// Converting date to LocalDateTime
-//					String pubDate = q.getPubDate();
-//					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
-//					LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
-//					a.setDatePublished(dateTime);
-//
-//					//Date added time
-//					LocalDateTime now = LocalDateTime.now();
-//					a.setDateAdded(now);
-//					// OK I NEED THE ARTICLE REPOSITORY YA DUM DUM...
-////					sourceRepository.save(s);
-//					try {
-//					articleRepository.save(a);
-//
-//					}catch (Exception e) {
-//						System.out.println("DB Article Insert error");
-//					}
-//				} // for loop
-//
-//		} // other for loop
-//
-//		Iterable<Article> articles = articleRepository.findAll();
-//
-//		model.addAttribute("articles", articles);
-//
-//
-//	return "articles";
-//
-//} // method
 
 
 
