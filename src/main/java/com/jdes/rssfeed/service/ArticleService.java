@@ -1,7 +1,10 @@
 package com.jdes.rssfeed.service;
 
-//public class ArticleService {
-//	
-//	void getArticles();
+//import java.util.Collection;
 //
-//}
+//import com.jdes.rssfeed.model.Article;
+
+public interface ArticleService {
+	
+
+}
