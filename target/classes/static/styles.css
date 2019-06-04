@@ -3,7 +3,14 @@ body {
 }
 
 a {
-  color: #008000;
+  color: blue;
+}
+
+a:visited {
+  color: purple;
+}
+a:hover {
+	color: orange;
 }
 
 h1 {
@@ -61,10 +68,6 @@ h2 {
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-
-.source {
-  color: hotpink;
 }
 
 .added {

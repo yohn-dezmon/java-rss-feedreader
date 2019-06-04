@@ -42,6 +42,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 
+import org.springframework.web.servlet.view.RedirectView;
+
+
 
 
 @Controller
@@ -130,26 +133,32 @@ public class RSSController {
 	return "index";
 }
 
-@GetMapping(path="/read/{article_id}")
-public String markArticleRead(@PathVariable int article_id) {
-	
-	
-	EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        EntityManager em = factory.createEntityManager();
-        
-	
-	ArticleDaoImpl articleImpl = new ArticleDaoImpl(em);
-	Article article = articleImpl.findById(article_id); 
-
-	
-	article.setUnread(0);
-	articleRepository.save(article);
-	
-//	th:href="@{${article.link}}"
-	
-	// how can I have this redirect to the article.link from firstArticles??
-	return "sources";
-}
+//@GetMapping(path="/read/{article_id}")
+//public String markArticleRead(@PathVariable int article_id) {
+//	
+//	
+//	
+//	EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+//        EntityManager em = factory.createEntityManager();
+//        
+//	
+//	ArticleDaoImpl articleImpl = new ArticleDaoImpl(em);
+//	Article article = articleImpl.findById(article_id); 
+//
+//	
+//	article.setUnread(1);
+//	articleRepository.save(article);
+//	
+//	String link = article.getLink();
+//	
+//	RedirectView redirectView = new RedirectView();
+//	redirectView.setUrl(link);
+//	
+////	th:href="@{${article.link}}"
+//	
+//	// how can I have this redirect to the article.link from firstArticles??
+//	return "redirectView";
+//}
 
 
 
