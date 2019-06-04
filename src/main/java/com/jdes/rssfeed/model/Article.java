@@ -43,8 +43,8 @@ public class Article {
 	private String guid;
 	
 	// Not sure if the boolean -> tinyint(1) will translate... 
-	@Column(name = "unread", columnDefinition="tinyint(1) default 1")
-	private boolean unread;
+	@Column(name = "unread", columnDefinition="int default 1")
+	private int unread;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	// does the name parameter refer to the spelling of the column in the MySQL DB or in the model?
@@ -98,11 +98,11 @@ public class Article {
     	this.guid = guid;
     }
     
-	public boolean getUnread() {
+	public int getUnread() {
 		return unread;
 	}
 	
-	public void setUnread(boolean unread) {
+	public void setUnread(int unread) {
 		this.unread = unread;
 	}
 	

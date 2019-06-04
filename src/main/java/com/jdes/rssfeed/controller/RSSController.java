@@ -142,7 +142,7 @@ public String markArticleRead(@PathVariable int article_id) {
 	Article article = articleImpl.findById(article_id); 
 
 	
-	article.setUnread(true);
+	article.setUnread(0);
 	articleRepository.save(article);
 	
 //	th:href="@{${article.link}}"
