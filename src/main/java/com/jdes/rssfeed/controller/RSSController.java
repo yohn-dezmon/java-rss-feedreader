@@ -36,8 +36,8 @@ import com.jdes.rssfeed.controller.Feed;
 
 import java.time.LocalDateTime;
 
-
-
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 
 
@@ -131,7 +131,7 @@ public String thymeSource(Model model) {
 // article table in the DB, then redirects to the HomePage
 @RequestMapping(value = "/thymesources", method = RequestMethod.POST)
 public String insertToSource(@ModelAttribute UsrInput input) {
-
+	
 	// this url was used as a test initially...
 //	String url = "http://rss.cnn.com/rss/money_topstories.rss";
 
@@ -182,7 +182,7 @@ public String insertToSource(@ModelAttribute UsrInput input) {
 		System.out.println("InterruptedException when updating articles");
 	}
 	
-	
+     
 
 	return "redirect:/";
 

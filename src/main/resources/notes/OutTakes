@@ -26,3 +26,27 @@ OUTTAKES:
 //	// how can I have this redirect to the article.link from firstArticles??
 //	return "redirectView";
 //}
+
+--
+
+I didn't do this b/c my UsrInput class was not set up as an entity and IDK
+if I want it to be an entity...
+
+
+https://www.javacodegeeks.com/2017/10/validation-thymeleaf-spring.html
+
+
+public String insertToSource(@ModelAttribute @Valid UsrInput input, BindingResult bindingResult) {
+if (bindingResult.hasErrors()) {
+        System.out.println("BINDING RESULT ERROR");
+        return "/thymesources";
+    } else {
+    } // else
+    
+    
+    <td th:if="${fields.hasErrors('input')}" th:errors="*{usrInput}">usrInput Error</td>
+    
+    
+    
+    
+    
