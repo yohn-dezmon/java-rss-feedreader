@@ -7,9 +7,10 @@
   <body>
   
     <form action="#" method="post" th:action="@{/thymesources}" th:object="${input}">
-      <input type="text" th:field="*{usrInput}">
+      <td><input type="text" th:field="*{usrInput}"></td>
       <button type="submit">Add feed</button>
     </form>
+    
     <h1>RSS Feeds in the Data Base</h1>
     <div>
     <!-- I think sources might need to be an object...? -->
@@ -22,9 +23,5 @@
     </p>
     </div>
     
-    <!--   {% for source in sources %}
-    <div>
-      <a href="{{ source.link }}">{{ source.title }}</a>
-    {% endfor %} -->
   </body>
 </html>
