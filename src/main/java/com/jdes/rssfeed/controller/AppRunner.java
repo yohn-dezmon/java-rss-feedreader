@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.jdes.rssfeed.service.UpdateServiceImpl;
 
-
+// This class allows my updatingLoop method to run asynchronously 
 
 @Component
 public class AppRunner implements CommandLineRunner {

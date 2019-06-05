@@ -1,10 +1,10 @@
 package com.jdes.rssfeed.model;
 
 import javax.persistence.*;
-import java.util.Date;
+
 
 import java.time.LocalDateTime;
-import java.util.Set;
+
 
 
 
@@ -29,11 +29,8 @@ public class Source {
 	private String feed;
 	
 	@Column(name = "date_added", columnDefinition="DATETIME")
-//	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime dateAdded;
 	
-//	@OneToMany(mappedBy = "source")
-//	private Set<Article> articles;
 	
 	public int getId() {
 		return id;

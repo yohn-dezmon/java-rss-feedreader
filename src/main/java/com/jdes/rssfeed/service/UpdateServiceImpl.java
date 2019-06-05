@@ -1,6 +1,6 @@
 package com.jdes.rssfeed.service;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,7 +23,7 @@ import org.springframework.scheduling.annotation.Async;
 import java.lang.InterruptedException;
 
 
-
+// this is my asynchronous method that runs upon execution of the spring-boot project
 
 
 @Service

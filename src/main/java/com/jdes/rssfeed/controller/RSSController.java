@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import com.jdes.rssfeed.service.HibernateSearchService;
 import com.jdes.rssfeed.service.SourceService;
 import com.jdes.rssfeed.service.UpdateServiceImpl;
 
@@ -36,15 +35,14 @@ import com.jdes.rssfeed.controller.Feed;
 
 import java.time.LocalDateTime;
 
-import javax.validation.Valid;
-import org.springframework.validation.BindingResult;
+
 
 
 
 @Controller
 public class RSSController {
 	
-	// not sure what this does exactly, https://kodejava.org/how-do-i-find-entity-by-their-id-in-jpa/
+	// https://kodejava.org/how-do-i-find-entity-by-their-id-in-jpa/
 	public static final String PERSISTENCE_UNIT_NAME = "article";
 
 	@Autowired // get the bean called articleRepository
@@ -52,9 +50,6 @@ public class RSSController {
 
 	@Autowired
 	private SourceRepository sourceRepository;
-
-	@Autowired
-	private HibernateSearchService searchservice;
 
 	@Autowired
 	private SourceService sourceservice;

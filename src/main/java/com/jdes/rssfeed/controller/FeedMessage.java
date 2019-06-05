@@ -2,7 +2,8 @@ package com.jdes.rssfeed.controller;
 
 // Represents one RSS message... 
 
-
+// this class is from https://www.vogella.com/tutorials/RSSFeed/article.html
+// I added the pubDate class variable
 
 public class FeedMessage {
 

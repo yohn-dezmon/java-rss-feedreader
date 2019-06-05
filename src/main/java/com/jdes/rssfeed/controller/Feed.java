@@ -3,6 +3,7 @@ package com.jdes.rssfeed.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+// This class is from https://www.vogella.com/tutorials/RSSFeed/article.html
 
 public class Feed {
 	final String title;

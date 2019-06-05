@@ -3,14 +3,12 @@ package com.jdes.rssfeed.model;
 
 import javax.persistence.*;
 
-//import org.springframework.data.annotation.CreatedDate;
+
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-import org.hibernate.annotations.CreationTimestamp;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -25,8 +23,8 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Article {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	// I think (and hope) that the name parameter refers to what the 
-	// column is named in the DB... but i really am not sure!
+	// the name parameter refers to the name of the column in the DB
+	// the private int id refers to the name within the hibernate model
 	@Column(name = "article_id")
 	private int id;
 	
@@ -42,12 +40,11 @@ public class Article {
 	@Column(name = "guid", columnDefinition="LONGTEXT", unique= true)
 	private String guid;
 	
-	// Not sure if the boolean -> tinyint(1) will translate... 
 	@Column(name = "unread", columnDefinition="int default 1")
 	private int unread;
 	
+	// foreign key!
 	@ManyToOne(fetch = FetchType.LAZY)
-	// does the name parameter refer to the spelling of the column in the MySQL DB or in the model?
 	@JoinColumn(name = "source_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Source source;
@@ -113,7 +110,7 @@ public class Article {
     }
     
 	// I might need to change thise to source.id
-	// hmmm I don't think so, the @JoinColumn should handle that! :D 
+	// I don't think so, the @JoinColumn should handle that! :D 
     public void setSourceId(Source source) {
     	this.source = source;
     }
