@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PathVariable;
 
 
 import com.jdes.rssfeed.dao.ArticleRepository;
@@ -19,13 +19,9 @@ import com.jdes.rssfeed.dao.SourceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Date;
 
-import com.jdes.rssfeed.dao.ArticleDaoImpl;
-
-import com.jdes.rssfeed.service.SourceServiceImpl;
 import com.jdes.rssfeed.service.HibernateSearchService;
 import com.jdes.rssfeed.service.SourceService;
 import com.jdes.rssfeed.service.UpdateServiceImpl;
@@ -37,16 +33,16 @@ import com.jdes.rssfeed.model.Source;
 import com.jdes.rssfeed.model.Article;
 import com.jdes.rssfeed.controller.Feed;
 // DateTime conversion dependencies
-import java.time.format.DateTimeFormatter;
+
 import java.time.LocalDateTime;
-import java.util.Locale;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 
-import org.springframework.web.servlet.view.RedirectView;
+//import javax.persistence.EntityManager;
+//import javax.persistence.EntityManagerFactory;
+//import javax.persistence.EntityNotFoundException;
+//import javax.persistence.Persistence;
+//
+//import org.springframework.web.servlet.view.RedirectView;
 
 
 
