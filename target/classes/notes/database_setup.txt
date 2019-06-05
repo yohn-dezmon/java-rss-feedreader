@@ -4,29 +4,37 @@ create database javafeedreader;
 --
 
 CREATE TABLE `source` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`title` longtext NOT NULL,
-`subtitle` longtext NOT NULL,
-`link` longtext NOT NULL,
-`feed` longtext NOT NULL,
-`date_added` datetime DEFAULT NULL,
-PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` longtext NOT NULL,
+  `subtitle` longtext NOT NULL,
+  `link` longtext NOT NULL,
+  `feed` longtext NOT NULL,
+  `date_added` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
 
 --
 
 CREATE TABLE `article` (
-`article_id` int(11) NOT NULL AUTO_INCREMENT,
-`title` longtext NOT NULL,
-`body` longtext NOT NULL,
-`link` longtext NOT NULL,
-`guid` varchar(255) NOT NULL,
-`unread` tinyint(1) NOT NULL,
-`source_id` int(11) NOT NULL,
-`date_added` datetime DEFAULT NULL,
-`date_published` datetime DEFAULT NULL,
-PRIMARY KEY (`article_id`),
-UNIQUE KEY `uc_source_guid` (`source_id`,`guid`),
-CONSTRAINT `article_ibfk_1` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`),
-CONSTRAINT `CONSTRAINT_1` CHECK (`unread` in (0,1))
+  `article_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` longtext NOT NULL,
+  `body` longtext NOT NULL,
+  `link` longtext NOT NULL,
+  `guid` varchar(255) NOT NULL,
+  `unread` int(1) NOT NULL DEFAULT 1,
+  `source_id` int(11) NOT NULL,
+  `date_added` datetime DEFAULT NULL,
+  `date_published` datetime DEFAULT NULL,
+  PRIMARY KEY (`article_id`),
+  UNIQUE KEY `uc_source_guid` (`source_id`,`guid`),
+  UNIQUE KEY `guid` (`guid`),
+  CONSTRAINT `article_ibfk_1` FOREIGN KEY (`source_id`) REFERENCES `source` (`id`),
+  CONSTRAINT `CONSTRAINT_1` CHECK (`unread` in (0,1))
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ;
+
+--
+
+ensure that in the application.properties 
+the "spring.jpa.hibernate.ddl-auto" 
+is set to "validate" ! 
+
