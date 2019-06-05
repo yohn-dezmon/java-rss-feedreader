@@ -21,3 +21,4 @@ Technologies used (please see pom.xml)
 2. Spring-boot
 3. Thymeleaf 
 4. MariaDB
+5. Hibernate
