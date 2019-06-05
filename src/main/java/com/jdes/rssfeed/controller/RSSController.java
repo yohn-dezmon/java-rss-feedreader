@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 import com.jdes.rssfeed.dao.ArticleRepository;
@@ -37,12 +37,6 @@ import com.jdes.rssfeed.controller.Feed;
 import java.time.LocalDateTime;
 
 
-//import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
-//import javax.persistence.EntityNotFoundException;
-//import javax.persistence.Persistence;
-//
-//import org.springframework.web.servlet.view.RedirectView;
 
 
 
@@ -71,65 +65,38 @@ public class RSSController {
 	@Autowired
 	private UpdateServiceImpl updateServiceImpl;
 	
-
-@GetMapping("/hello")
-    public String hello(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "hello";
-    }
-@GetMapping("/sample")
-  public String showForm() {
-    // the return "sample" refers to the resource to be called
-    // What is displayed on the browser is the view defined within the .jsp
-    // or the html file
-    // the .jsp file should be stored in WEB-INF/view
-    // the html file should be stored within resources/templates :D
-    return "sample";
-  }
-
+// this is the HomePage, it displays four News Sources and their Articles sorted by Date Added to the DB
 @GetMapping("/")
     public String mainPage(Model model) {
-
+	
+	
+	// This retrieves all of the Articles for a given source, the srcId can be changed as desired
 	int srcId = 1;
 	Iterable<Article> firstArticles = articleRepository.findUnreadArticles(srcId);
 
-	// I want the name of the Article... I might just do this manually...
+	// This provides the name of the News Source
 	String firstSourceTitle = sourceRepository.sourceTitle(srcId);
-
-
 
 	model.addAttribute("firstArticles", firstArticles);
 	model.addAttribute("firstSourceTitle", firstSourceTitle);
 
 	int srcId2 = 2;
 	Iterable<Article> secondArticles = articleRepository.findUnreadArticles(srcId2);
-
-	// I want the name of the Article... I might just do this manually...
 	String secondSourceTitle = sourceRepository.sourceTitle(srcId2);
-
-
 
 	model.addAttribute("secondArticles", secondArticles);
 	model.addAttribute("secondSourceTitle", secondSourceTitle);
 
 	int srcId3 = 3;
 	Iterable<Article> thirdArticles = articleRepository.findUnreadArticles(srcId3);
-
-	// I want the name of the Article... I might just do this manually...
 	String thirdSourceTitle = sourceRepository.sourceTitle(srcId3);
-
-
 
 	model.addAttribute("thirdArticles", thirdArticles);
 	model.addAttribute("thirdSourceTitle", thirdSourceTitle);
 
 	int srcId4 = 9;
 	Iterable<Article> fourthArticles = articleRepository.findUnreadArticles(srcId4);
-
-	// I want the name of the Article... I might just do this manually...
 	String fourthSourceTitle = sourceRepository.sourceTitle(srcId4);
-
-
 
 	model.addAttribute("fourthArticles", fourthArticles);
 	model.addAttribute("fourthSourceTitle", fourthSourceTitle);
@@ -139,22 +106,9 @@ public class RSSController {
 
 
 
-@GetMapping(path="/sources")
-public @ResponseBody Iterable<Source> displaySources() {
-
-	// sourceRepository.findAll(); returns a JSON of the sources... how do I extract just the title?
-	return sourceRepository.findAll();
-
-}
 
 
-@GetMapping(path="/sourcestitles")
-public @ResponseBody List<String> doWhatISaid() {
-
-	return sourceservice.getSources();
-}
-
-//get rid of @ResponseBody b/c this returns a string, as opposed to using a template!
+// This is the page to add News Sources using an RSS feed
 @RequestMapping(value = "/thymesources", method = RequestMethod.GET)
 public String thymeSource(Model model) {
 
@@ -173,11 +127,12 @@ public String thymeSource(Model model) {
 }
 
 
-//
+// This Post Method updates first the source table in the DB and then the 
+// article table in the DB, then redirects to the HomePage
 @RequestMapping(value = "/thymesources", method = RequestMethod.POST)
 public String insertToSource(@ModelAttribute UsrInput input) {
-	// ok how do I get the html form to
 
+	// this url was used as a test initially...
 //	String url = "http://rss.cnn.com/rss/money_topstories.rss";
 
 	String url = input.getUsrInput();
@@ -229,11 +184,24 @@ public String insertToSource(@ModelAttribute UsrInput input) {
 	
 	
 
-	return "redirect:thymesources";
+	return "redirect:/";
+
+}
+
+@GetMapping(path="/sources")
+public @ResponseBody Iterable<Source> displaySources() {
+
+	// sourceRepository.findAll(); returns an Iterable of the sources...
+	return sourceRepository.findAll();
 
 }
 
 
+@GetMapping(path="/sourcestitles")
+public @ResponseBody List<String> getSourceTitles() {
+
+	return sourceservice.getSources();
+}
 
 
 

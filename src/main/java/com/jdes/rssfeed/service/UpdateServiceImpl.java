@@ -23,15 +23,11 @@ import org.springframework.scheduling.annotation.Async;
 import java.lang.InterruptedException;
 
 
-//import org.springframework.boot.web.client.RestTemplateBuilder;
-//import org.springframework.web.client.RestTemplate;
+
 
 
 @Service
 public class UpdateServiceImpl {
-	
-	// I don't know why but this doesn't work...
-//	private final RestTemplate restTemplate;
 	
 	@Autowired 
 	private SourceRepository sourceRepository;
@@ -75,13 +71,13 @@ public class UpdateServiceImpl {
 						a.setLink(link);
 						a.setGuid(guid);
 						
-						// how can I access the source from which the article comes...
+						
 						a.setSourceId(s);
 						
 						// Converting date to LocalDateTime
 						String pubDate = q.getPubDate();
 						
-						// I might need to add an if statment here to account for different patterns...
+						// The booleans below account for different patterns of published dates...
 						
 						boolean hoursMinSec=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}:[\\d]{2}\\s[\\w]{3}").matcher(pubDate).matches();
 						boolean zoneOffset=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}:[\\d]{2}[\\s][\\Q+\\E][\\d]{4}").matcher(pubDate).matches();
@@ -103,7 +99,7 @@ public class UpdateServiceImpl {
 							a.setDatePublished(dateTime);
 						}
 						else if ((zoneOffset == true ) || (zoneOffsetNeg == true)) {
-							// wait I don't know how to parse this one with DateTimeFormatter 
+							// xxxx parses the zone offset 
 							try {
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss xxxx", Locale.ENGLISH);
 							LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
@@ -128,8 +124,7 @@ public class UpdateServiceImpl {
 						//Date added time
 						LocalDateTime now = LocalDateTime.now();
 						a.setDateAdded(now);
-						// OK I NEED THE ARTICLE REPOSITORY YA DUM DUM...
-//						sourceRepository.save(s);
+						// OK I NEED THE ARTICLE REPOSITORY
 						try {
 						articleRepository.save(a); 
 						
