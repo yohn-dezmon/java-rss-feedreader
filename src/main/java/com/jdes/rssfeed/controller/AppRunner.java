@@ -1,4 +1,4 @@
-package com.jdes.rssfeed;
+package com.jdes.rssfeed.controller;
 
 
 import org.springframework.boot.CommandLineRunner;

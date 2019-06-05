@@ -1,0 +1,28 @@
+OUTTAKES:
+
+//@GetMapping(path="/read/{article_id}")
+//public String markArticleRead(@PathVariable int article_id) {
+//	
+//	
+//	
+//	EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+//        EntityManager em = factory.createEntityManager();
+//        
+//	
+//	ArticleDaoImpl articleImpl = new ArticleDaoImpl(em);
+//	Article article = articleImpl.findById(article_id); 
+//
+//	
+//	article.setUnread(1);
+//	articleRepository.save(article);
+//	
+//	String link = article.getLink();
+//	
+//	RedirectView redirectView = new RedirectView();
+//	redirectView.setUrl(link);
+//	
+////	th:href="@{${article.link}}"
+//	
+//	// how can I have this redirect to the article.link from firstArticles??
+//	return "redirectView";
+//}
