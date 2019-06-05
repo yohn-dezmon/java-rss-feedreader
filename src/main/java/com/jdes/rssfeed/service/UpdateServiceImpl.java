@@ -20,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.scheduling.annotation.Async;
 
+import java.lang.InterruptedException;
+
+
 //import org.springframework.boot.web.client.RestTemplateBuilder;
 //import org.springframework.web.client.RestTemplate;
 
@@ -83,7 +86,7 @@ public class UpdateServiceImpl {
 						boolean hoursMinSec=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}:[\\d]{2}\\s[\\w]{3}").matcher(pubDate).matches();
 						boolean zoneOffset=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}:[\\d]{2}[\\s][\\Q+\\E][\\d]{4}").matcher(pubDate).matches();
 						boolean hoursMin=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}\\s[\\w]{3}").matcher(pubDate).matches();
-						
+						boolean zoneOffsetNeg=Pattern.compile("[\\w]{3},\\s[\\d]{2}\\s[\\w]{3}\\s[\\d]{4}\\s[\\d]{2}:[\\d]{2}:[\\d]{2}[\\s][\\Q-\\E][\\d]{4}").matcher(pubDate).matches();
 						
 						if (hoursMinSec == true) {
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.ENGLISH);
@@ -99,7 +102,7 @@ public class UpdateServiceImpl {
 							System.out.println("hoursMin == true");
 							a.setDatePublished(dateTime);
 						}
-						else if (zoneOffset == true ) {
+						else if ((zoneOffset == true ) || (zoneOffsetNeg == true)) {
 							// wait I don't know how to parse this one with DateTimeFormatter 
 							try {
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss xxxx", Locale.ENGLISH);
@@ -116,7 +119,7 @@ public class UpdateServiceImpl {
 								LocalDateTime dateTime = LocalDateTime.parse(pubDate, formatter);
 							}
 							catch (Exception e) {
-								System.out.println("Invalid Published Date format!");
+								System.out.println("Invalid Published Date format: "+pubDate);
 							}
 						}
 						

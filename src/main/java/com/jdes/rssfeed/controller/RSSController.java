@@ -28,6 +28,10 @@ import com.jdes.rssfeed.dao.ArticleDaoImpl;
 import com.jdes.rssfeed.service.SourceServiceImpl;
 import com.jdes.rssfeed.service.HibernateSearchService;
 import com.jdes.rssfeed.service.SourceService;
+import com.jdes.rssfeed.service.UpdateServiceImpl;
+
+import java.lang.InterruptedException;
+
 
 import com.jdes.rssfeed.model.Source;
 import com.jdes.rssfeed.model.Article;
@@ -67,6 +71,10 @@ public class RSSController {
 
 	@Autowired
 	private SourceRepository sourcerepository;
+	
+	@Autowired
+	private UpdateServiceImpl updateServiceImpl;
+	
 
 @GetMapping("/hello")
     public String hello(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
@@ -119,7 +127,7 @@ public class RSSController {
 	model.addAttribute("thirdArticles", thirdArticles);
 	model.addAttribute("thirdSourceTitle", thirdSourceTitle);
 
-	int srcId4 = 4;
+	int srcId4 = 9;
 	Iterable<Article> fourthArticles = articleRepository.findUnreadArticles(srcId4);
 
 	// I want the name of the Article... I might just do this manually...
@@ -132,33 +140,6 @@ public class RSSController {
 
 	return "index";
 }
-
-//@GetMapping(path="/read/{article_id}")
-//public String markArticleRead(@PathVariable int article_id) {
-//	
-//	
-//	
-//	EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-//        EntityManager em = factory.createEntityManager();
-//        
-//	
-//	ArticleDaoImpl articleImpl = new ArticleDaoImpl(em);
-//	Article article = articleImpl.findById(article_id); 
-//
-//	
-//	article.setUnread(1);
-//	articleRepository.save(article);
-//	
-//	String link = article.getLink();
-//	
-//	RedirectView redirectView = new RedirectView();
-//	redirectView.setUrl(link);
-//	
-////	th:href="@{${article.link}}"
-//	
-//	// how can I have this redirect to the article.link from firstArticles??
-//	return "redirectView";
-//}
 
 
 
@@ -208,24 +189,49 @@ public String insertToSource(@ModelAttribute UsrInput input) {
 	RSSFeedParser newSource = new RSSFeedParser(url);
 	// This will return a feed [ITEM, TITLE, DESCRIPTION, LINK
 	// GUID, LANGUAGE, AUTHOR, PUB_DATE, COPYRIGHT]
+	String title = "";
+	String subTitle = "";
+	String link = "";
+
+	
+	try {
 	Feed parsed = newSource.readFeed();
+	title = parsed.title;
+	subTitle = parsed.description;
+	link = parsed.link;
+	} catch (Exception e) {
+		System.out.println("error parsing RSS");
+	}
 	// I NEED -> title, subtitle, link, feed,
-
-
-	String title = parsed.title;
-	String subTitle = parsed.description;
-	String link = parsed.link;
 
 	LocalDateTime now = LocalDateTime.now();
 
 	// this should insert this source into the DB..
 	Source s = new Source();
+	try {
 	s.setFeed(url);
 	s.setLink(link);
 	s.setTitle(title);
 	s.setSubtitle(subTitle);
-	s.setDateAdded(now);
-	sourceRepository.save(s);
+	s.setDateAdded(now); }
+	catch (Exception e) {
+		System.out.println("error setting Source attributes");
+	}
+	try {
+	sourceRepository.save(s); }
+	catch (Exception e) {
+		System.out.println("error inserting into DB [hibernate]");
+	}
+	
+	
+	
+	try {
+	updateServiceImpl.updatingLoop(); }
+	catch (InterruptedException e) {
+		System.out.println("InterruptedException when updating articles");
+	}
+	
+	
 
 	return "redirect:thymesources";
 
