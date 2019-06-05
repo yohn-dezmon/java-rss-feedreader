@@ -9,7 +9,6 @@ import com.jdes.rssfeed.model.Source;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 
 
 
@@ -40,10 +39,5 @@ public class SourceServiceImpl implements SourceService {
 
     }
     
-//    public String getSourceTitle(int srcId) {
-//    	
-//    	Source source = new Source();
-//    	
-//    }
 }
 

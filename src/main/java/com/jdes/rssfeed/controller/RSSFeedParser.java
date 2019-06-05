@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import java.util.Date;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -13,7 +12,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 
-
+// this class is from https://www.vogella.com/tutorials/RSSFeed/article.html
 
 public class RSSFeedParser {
     static final String TITLE = "title";

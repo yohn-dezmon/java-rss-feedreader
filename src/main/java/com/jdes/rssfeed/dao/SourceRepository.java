@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
  
-// What is the Integer after Source, ??
+// What is the Integer after Source? This allows CrudRepository to take parameters of either Source OR Integer!
 // WHy is this returning only the first row? https://stackoverflow.com/questions/39497931/jpa-hibernate-query-only-returning-one-row
 public interface SourceRepository extends CrudRepository<Source, Integer> {
 	

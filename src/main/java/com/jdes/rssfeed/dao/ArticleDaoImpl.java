@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import com.jdes.rssfeed.model.Article;
 
-
+// I set up this implementation to perform a custom query
 
 public class ArticleDaoImpl implements ArticleRepository {
 	
