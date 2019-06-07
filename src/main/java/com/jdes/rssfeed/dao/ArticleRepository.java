@@ -18,9 +18,6 @@ public interface ArticleRepository extends CrudRepository<Article, Integer> {
 	@Query(value = "SELECT * FROM article WHERE article.unread = 0 AND article.source_id = :srcId ORDER BY article.date_added DESC", nativeQuery = true)
 	public Iterable<Article> findUnreadArticles(@Param("srcId") int srcId);
 	
-	public Article findById(int id);
-	
-	
-	
+
 	
 }

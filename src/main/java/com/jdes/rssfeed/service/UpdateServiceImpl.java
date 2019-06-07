@@ -134,7 +134,11 @@ public class UpdateServiceImpl {
 					} // for loop 
 					
 			} // other for loop 
-			Thread.sleep(60000L);	
+			try {
+			Thread.sleep(60000L);	}
+			catch (InterruptedException e) {
+				System.out.println(e);
+			}
 		} // while loop 
 		
 	} // method 

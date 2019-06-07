@@ -56,78 +56,78 @@ public class Article {
 	@Column(name = "date_published", columnDefinition="DATETIME", updatable= false)
 	private LocalDateTime datePublished;
 	
-	public int getId() {
+	public synchronized int getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public synchronized void setId(int id) {
 		this.id = id;
 	}
 	
-	public String getTitle() {
+	public synchronized String getTitle() {
 		return title;
 	}
 	
-    public void setTitle(String title) {
+    public synchronized void setTitle(String title) {
 		this.title = title;
 	}
     
-    public String getBody() {
+    public synchronized String getBody() {
     	return body;
     }
     
-    public void setBody(String body) {
+    public synchronized void setBody(String body) {
     	this.body = body;
     }
     
-    public String getLink() {
+    public synchronized String getLink() {
     	return link;
     }
     
-    public void setLink(String link) {
+    public synchronized void setLink(String link) {
     	this.link = link;
     }
     
-    public String getGuid() {
+    public synchronized String getGuid() {
     	return guid;
     }
     
-    public void setGuid(String guid) {
+    public synchronized void setGuid(String guid) {
     	this.guid = guid;
     }
     
-	public int getUnread() {
+	public synchronized int getUnread() {
 		return unread;
 	}
 	
-	public void setUnread(int unread) {
+	public synchronized void setUnread(int unread) {
 		this.unread = unread;
 	}
 	
 	// Do I need a get/set for the foreign key? yes...
 	
-	public Source getSourceId() {
+	public synchronized Source getSourceId() {
     	return source;
     }
     
 	// I might need to change thise to source.id
 	// I don't think so, the @JoinColumn should handle that! :D 
-    public void setSourceId(Source source) {
+    public synchronized void setSourceId(Source source) {
     	this.source = source;
     }
 	
-	public LocalDateTime getDateAdded() {
+	public synchronized LocalDateTime getDateAdded() {
 		return dateAdded;
 	}
 	
-	public void setDateAdded(LocalDateTime dateAdded) {
+	public synchronized void setDateAdded(LocalDateTime dateAdded) {
 		this.dateAdded = dateAdded;
 	}
 	
-	public LocalDateTime getDatePublished() {
+	public synchronized LocalDateTime getDatePublished() {
 		return datePublished;
 	}
 	
-	public void setDatePublished(LocalDateTime datePublished) {
+	public synchronized void setDatePublished(LocalDateTime datePublished) {
 		this.datePublished = datePublished;
 	}	
 	

@@ -32,51 +32,51 @@ public class Source {
 	private LocalDateTime dateAdded;
 	
 	
-	public int getId() {
+	public synchronized int getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public synchronized void setId(int id) {
 		this.id = id;
 	}
 	
-	public String getTitle() {
+	public synchronized String getTitle() {
 		return title;
 	}
 	
-    public void setTitle(String title) {
+    public synchronized void setTitle(String title) {
 		this.title = title;
 	}
     
-    public String getSubtitle() {
+    public synchronized String getSubtitle() {
     	return subtitle;
     }
     
-    public void setSubtitle(String subtitle) {
+    public synchronized void setSubtitle(String subtitle) {
     	this.subtitle = subtitle;
     }
     
-    public String getLink() {
+    public synchronized String getLink() {
     	return link;
     }
     
-    public void setLink(String link) {
+    public synchronized void setLink(String link) {
     	this.link = link;
     }
     
-    public String getFeed() {
+    public synchronized String getFeed() {
     	return feed;
     }
     
-    public void setFeed(String feed) {
+    public synchronized void setFeed(String feed) {
     	this.feed = feed;
     }
 	
 	
-	public LocalDateTime getDateAdded() {
+	public synchronized LocalDateTime getDateAdded() {
 		return dateAdded;
 	}
 	
-	public void setDateAdded(LocalDateTime dateAdded) {
+	public synchronized void setDateAdded(LocalDateTime dateAdded) {
 		this.dateAdded = dateAdded;
 	}
 	
